@@ -1,0 +1,48 @@
+import React,{useState,useEffect} from "react"
+import BotArmy from "./BotArmy"
+import BotCollection from "./BotCollection"
+
+function Bots() {
+
+const [bots, setBots] = useState([])
+const [army, setArmy] = useState([])
+const [enlisted, setEnlisted] = useState([])
+
+useEffect(() => {
+    fetch('https://json-server-bot-battlr-vercel.vercel.app/bots')
+    .then(res => res.json())
+    .then(data => setBots(data))
+
+}, [])
+
+function enlistArmy(bot) {
+    if (!army.includes(bot)) {
+        setArmy([...army, bot])
+        setEnlisted([...enlisted, bot.id])
+      }
+}
+
+function removeFromArmy(bot) {
+    setArmy(army.filter((armyBot) => armyBot.id !== bot.id))
+    setEnlisted(enlisted.filter((armyBot) => armyBot !== bot.id))
+}
+
+function dischargeBot(id) {
+    fetch(`https://json-server-bot-battlr-vercel.vercel.app/bots/${id}`, {
+        method: "DELETE",
+    })
+    setBots(bots.filter((bot) => bot.id !== id))
+    
+}
+
+console.log(enlisted)
+  return (
+  <>
+   <div className='battle-bots'>
+    <BotArmy army={army} removeFromArmy={removeFromArmy} />
+    <BotCollection bots={bots} onEnlistBot={enlistArmy} dischargeBot={dischargeBot} enlisted={enlisted} />
+</div></>
+  )
+}
+
+export default Bots

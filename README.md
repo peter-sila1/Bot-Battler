@@ -18,7 +18,7 @@ Open a terminal / command line interface on your computer
 
 Clone the repo by using the following:
 
-  git clone 
+  git clone https://github.com/peter-sila1/Bot-Battler.git
 Be patient as it creates a copy on your local machine for you.
 
 Change directory to the repo folder:
@@ -65,7 +65,6 @@ ReactJs.
 [CSS]
 Authors
 This project was contributed to by:
-
-Ian Ayub
+Sila Peter
 License
 The project is licensed under MIT. See the LICENSE file for license rights and limitations.
